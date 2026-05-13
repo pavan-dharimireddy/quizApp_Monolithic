@@ -18,13 +18,7 @@ public class QuestionController {
 
     @GetMapping("allQuestions")
     public ResponseEntity<?> getAllQuestions(){
-        List<Question> questions = questionService.getAllQuestions();
-        if(questions != null){
-            return new ResponseEntity<>(questions, HttpStatus.OK);
-        }
-        else{
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return questionService.getAllQuestions();
     }
 
     @GetMapping("category/{value}")
@@ -33,15 +27,7 @@ public class QuestionController {
     }
 
     @PostMapping("addQuestion")
-    public String addQuestion(@RequestBody Question question){
-        String message = "";
-        try {
-            questionService.addQuestion(question);
-            message = "success";
-        }
-        catch(Exception e){
-            message = e.getMessage();
-        }
-        return message;
+    public ResponseEntity<String> addQuestion(@RequestBody Question question){
+            return questionService.addQuestion(question);
     }
 }

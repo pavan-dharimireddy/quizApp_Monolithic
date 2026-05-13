@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import lombok.Data;
 
 @Data
@@ -12,7 +13,8 @@ import lombok.Data;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_sequence")
+    @SequenceGenerator(name = "question_sequence", sequenceName = "question_sequence", allocationSize = 1, initialValue = 2000)
     private Integer id;
     private String questionTitle;
     private String option1;
@@ -22,6 +24,5 @@ public class Question {
     private String rightAnswer;
     private String difficultyLevel;
     private String category;
-
 
 }
